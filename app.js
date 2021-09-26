@@ -1,40 +1,66 @@
-const intial_prize = document.getElementById('intial_price')
-const quantity = document.getElementById('quantity')
-const current_price = document.getElementById('current_price')
-const submit_button = document.getElementById('submit_button')
-const result_section = document.getElementById('result_section')
+const intialPrice = document.getElementById('intial_price')
+const Quantity = document.getElementById('quantity')
+const currentPrice = document.getElementById('current_price')
+const submitBtn = document.getElementById('submit_button')
+const Output = document.getElementById('result_section')
 
 
 
-submit_button.addEventListener('click', ()=>{
-    result_section.innerHTML=''
-    if(!intial_prize.value  || !current_price.value || !quantity.value){
-        result_section.style['color']='red'
-        result_section.style['margin-top']='3vh'
-        return   result_section.innerHTML = 'Opps..Enter valid data'
+submitBtn.addEventListener("click",calculator);
+
+function calculateProfitandLoss(IP,Q,CP){
+    if(CP < IP){
+        var loss = (IP - CP)*Q;
+        loss = showTillTwoDecimal(loss);
+        var lossPercent = ((IP-CP)/IP)*100;
+        lossPercent = showTillTwoDecimal(lossPercent);
+        var message = `Whoops!! Your loss is ${loss} and loss Percentage is ${lossPercent}% ☹️`;
+        colorOfText = "#ef9a9a";
+        showMessage(message,colorOfText);
+
     }
-    if(intial_prize.value == 0 && current_price.value  ==0 && quantity.value ==0){
-        result_section.style['margin-top']='3vh'
-        return   result_section.innerHTML = 'No gain and no loss'
+    else if(CP > IP){
+        var profit = (CP - IP)*Q;
+        profit = showTillTwoDecimal(profit);
+        var profitPercent = ((CP - IP)/IP)*100;
+        profitPercent = showTillTwoDecimal(profitPercent);
+        var message = `Yay!! Your Profit is ${profit} and profit Percentage is ${profitPercent}% 🥳`;
+        colorOfText = "#00e676";
+        showMessage(message,colorOfText);
     }
-    if(intial_prize.value == 0 || current_price.value  ==0 || quantity.value ==0){
-        result_section.style['color']='red'
-        result_section.style['margin-top']='3vh'
-        return   result_section.innerHTML = 'Opps..Enter valid data'
+    else {
+        var message = `No pain No gain and no gain no pain 😉`;
+        colorOfText = "#bbdefb";
+        showMessage(message,colorOfText);
     }
-   
-    const intial_total = intial_prize.value * quantity.value
-    const current_total = current_price.value * quantity.value     
-    if(intial_total > current_total ) {
-        const diff_in_rupees = intial_total - current_total 
-        const diff_in_percentage = Math.abs((((intial_total - diff_in_rupees ) / intial_total)*100 )-100)
-        result_section.style['margin-top']='3vh'
-        result_section.innerHTML = `Your loss is -${diff_in_rupees} rupee and -${diff_in_percentage.toFixed(2)}%`
-    }else{
-        const diff_in_rupees = current_total - intial_total 
-        const diff_in_percentage = (((intial_total + diff_in_rupees ) / intial_total)*100)-100
-        result_section.style['margin-top']='3vh'
-        result_section.innerHTML = `Your profit is ${diff_in_rupees} rupee and ${diff_in_percentage.toFixed(2)}%`
+}
+
+function calculator(){
+    var IP = Number(intialPrice.value);
+    var Q = Number(Quantity.value);
+    var CP = Number(currentPrice.value);
+    if(IP == 0  || Q == 0 || CP == 0){
+        message = "Please Enter all required fields 🧐";
+        colorOfText = "#e1bee7";
+        showMessage(message,colorOfText);
+    }
+    else if(IP < 0  || Q < 0 || CP < 0){
+        message = "Please Enter positive values only 😐";
+        colorOfText = "#e1bee7";
+        showMessage(message,colorOfText);
+    }
+    else{
+        calculateProfitandLoss(IP,Q,CP);
     }
     
-})
+}
+
+function showMessage(message,colorOfText){
+    Output.style.color = colorOfText;
+    Output.innerHTML = message;
+}
+
+
+function showTillTwoDecimal(x){
+    return Number.parseFloat(x).toFixed(2);
+}
