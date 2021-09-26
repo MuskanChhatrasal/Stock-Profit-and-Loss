@@ -15,7 +15,7 @@ function calculateProfitandLoss(IP,Q,CP){
         var lossPercent = ((IP-CP)/IP)*100;
         lossPercent = showTillTwoDecimal(lossPercent);
         var message = `Whoops!! Your loss is ${loss} and loss Percentage is ${lossPercent}% `;
-        colorOfText = "#ef9a9a";
+        colorOfText = "#000000";
         showMessage(message,colorOfText);
 
     }
@@ -25,7 +25,7 @@ function calculateProfitandLoss(IP,Q,CP){
         var profitPercent = ((CP - IP)/IP)*100;
         profitPercent = showTillTwoDecimal(profitPercent);
         var message = `Yay!! Your Profit is ${profit} and profit Percentage is ${profitPercent}%`;
-        colorOfText = "#00e676";
+        colorOfText = "#000000";
         showMessage(message,colorOfText);
     }
     else {
