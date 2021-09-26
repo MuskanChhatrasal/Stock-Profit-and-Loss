@@ -30,7 +30,7 @@ function calculateProfitandLoss(IP,Q,CP){
     }
     else {
         var message = `No pain No gain and no gain no pain`;
-        colorOfText = "#bbdefb";
+        colorOfText = "#000000";
         showMessage(message,colorOfText);
     }
 }
