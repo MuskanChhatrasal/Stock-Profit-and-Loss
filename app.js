@@ -41,12 +41,12 @@ function calculator(){
     var CP = Number(currentPrice.value);
     if(IP == 0  || Q == 0 || CP == 0){
         message = "Please Enter all required fields";
-        colorOfText = "#e1bee7";
+        colorOfText = "#000000";
         showMessage(message,colorOfText);
     }
     else if(IP < 0  || Q < 0 || CP < 0){
         message = "Please Enter positive values only";
-        colorOfText = "#e1bee7";
+        colorOfText = "#000000";
         showMessage(message,colorOfText);
     }
     else{
